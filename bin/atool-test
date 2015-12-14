@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+if (process.argv[2]==='-v'||process.argv[2]==='--version'){
+  console.log(require('../package').version);
+  process.exit(0);
+}
+
+var spawn = require('child_process').spawn;
+var path = require('path');
+var mocha = path.join(__dirname,'../node_modules/.bin/mocha');
+var args = process.argv[2]==='--help'?[mocha,'--help']:[
+  mocha,
+  '--require',
+  'babel-core/register',
+  path.join(__dirname,'../lib/global')
+].concat(process.argv.slice(2));
+
+
+var proc = spawn(process.execPath, args, { stdio: 'inherit' });
+proc.on('exit', function (code, signal) {
+  process.on('exit', function(){
+    if (signal) {
+      process.kill(process.pid, signal);
+    } else {
+      process.exit(code);
+    }
+  });
+});
+
+process.on('SIGINT', function () {
+  proc.kill('SIGINT');
+  proc.kill('SIGTERM');
+});
