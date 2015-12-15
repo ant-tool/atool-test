@@ -40,7 +40,7 @@ function defineTasks() {
   });
 }
 
-export default function () {
+export function test() {
   defineTasks();
   gulp.start('test:coverage');
 }
