@@ -2,15 +2,15 @@
 
 ## 特性
 
-- 基于 mocha 实现
+- 基于 mocha 实现, coverage summary|html 
 - 内置 es2015, react, stage-0, jsdom, expect
 
 ```bash
-$ atool-test options
+$ atool-test
 ```
 
 eg:
-atool-test test.js
+atool-test
 ```javascript
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
@@ -31,8 +31,8 @@ describe('dom', () => {
 
 ## todo
 
-- coverage
+- coverage: ok
 - testUtil
-- eslint
+- eslint: ok
 - travis
 - ?
