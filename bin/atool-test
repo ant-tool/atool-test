@@ -1,23 +1,21 @@
 #!/usr/bin/env node
 
-if (process.argv[2]==='-v'||process.argv[2]==='--version'){
-  console.log(require('../package').version);
-  process.exit(0);
-}
-
-var spawn = require('child_process').spawn;
+var commander = require('commander');
 var path = require('path');
-var mocha = path.join(__dirname,'../node_modules/.bin/mocha');
-var args = process.argv[2]==='--help'?[mocha,'--help']:[
-  mocha,
-  '--require',
-  'babel-core/register',
-  path.join(__dirname,'../lib/global')
-].concat(process.argv.slice(2));
+var spawn = require('child_process').spawn;
 
+commander
+  .version(require('../package').version, '-v, --version')
+  .option('-w, --watch', 'watch test file changes and retest')
+  .option('-c, --coverage', 'code coverage')
+  .parse(process.argv);
 
-var proc = spawn(process.execPath, args, { stdio: 'inherit' });
-proc.on('exit', function (code, signal) {
+//#require('../lib/test')(commander);
+
+var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
+var child = spawn('node_modules/.bin/karma', ['start', karma_config_file], { stdio: 'inherit' })
+
+child.on('exit', function (code, signal) {
   process.on('exit', function(){
     if (signal) {
       process.kill(process.pid, signal);
@@ -28,6 +26,9 @@ proc.on('exit', function (code, signal) {
 });
 
 process.on('SIGINT', function () {
-  proc.kill('SIGINT');
-  proc.kill('SIGTERM');
+  child.kill('SIGINT');
+  child.kill('SIGTERM');
 });
+
+
+
