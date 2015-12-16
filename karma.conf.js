@@ -1,17 +1,61 @@
-var webpack = require('webpack');
 var path = require('path');
 var cwd = process.cwd();
+var getWebpackCommonConfig = require('atool-build/lib/getWebpackCommonConfig');
+var webpack = require('webpack');
 
-// TODO 测试配置
+var webpackConfig = getWebpackCommonConfig({
+  cwd: cwd
+});
 
-//var test_webpack_file = __dirname + '/tests.webpack.js';
-//var preprocessor = {};
-//preprocessor[test_webpack_file] = ['webpack', 'sourcemap'];
+webpackConfig.devtool = 'inline-source-map';
 
-var files = path.resolve(cwd, './test/**/*-test.js');
-console.log(files);
+webpackConfig.plugins.push(
+  new webpack.ProgressPlugin(function(percentage, msg) {
+    var stream = process.stderr;
+    if (stream.isTTY && percentage < 0.71) {
+      stream.cursorTo(0);
+      stream.write(msg);
+      stream.clearLine(1);
+    } else if (percentage === 1) {
+      console.log('\nwebpack: bundle build is now finished.');
+    }
+  })
+);
+
+// CommonsChunkPlugin 出来的common.js 会导致报错
+// https://github.com/webpack/karma-webpack/issues/24
+webpackConfig.plugins = [
+  new webpack.ProgressPlugin(function(percentage, msg) {
+    var stream = process.stderr;
+    if (stream.isTTY && percentage < 0.71) {
+      stream.cursorTo(0);
+      stream.write(msg);
+      stream.clearLine(1);
+    } else if (percentage === 1) {
+      console.log('\nwebpack: bundle build is now finished.');
+    }
+  }),
+  //new webpack.NormalModuleReplacementPlugin(/^sinon$/, './setup/sinon-1.17.2.js'),
+];
+
+// https://github.com/webpack/webpack/issues/304
+//webpackConfig.module.noParse = [/\/sinon.js/];
+
+// TODO 测试覆盖率
+//webpackConfig.module.loaders.push(
+//  { test: /\.jsx?$/, include:/src/, loader: 'isparta' }
+//)
+
+var base_test_dir = 'test';
+var testArgs = process.argv.slice(4);
+if (testArgs.length && testArgs[0] === '--test-dir') {
+  base_test_dir = testArgs[1];
+}
+
+var files_to_test = path.resolve(cwd, './'+ base_test_dir +'/**/*-test.js');
 var preprocessor = {};
-preprocessor[files] = ['webpack', 'sourcemap'];
+preprocessor[files_to_test] = ['webpack', 'sourcemap'];
+preprocessor['./lib/setup.js'] = ['webpack'];
 
 module.exports = function (config) {
   config.set({
@@ -25,9 +69,9 @@ module.exports = function (config) {
     frameworks: ['mocha'],
 
     files: [
-      // files
       './phantomjs-polyfill.js',
-      './tests.webpack.js'
+      './lib/setup.js',
+      files_to_test,
     ],
 
     plugins: [
@@ -36,18 +80,12 @@ module.exports = function (config) {
       require("karma-mocha-reporter"),
       require("karma-sourcemap-loader"),
       require("karma-phantomjs-launcher"),
-      //require("karma-chrome-launcher"),
       require('karma-coverage')
     ],
 
     reporters: ['mocha', 'coverage'],
 
-    //preprocessors: preprocessor,
-    preprocessors: {
-      './tests.webpack.js': ['webpack', 'sourcemap']
-      //'test/*-test.js': ['webpack'],
-      //'test/**/*-test.js': ['webpack']
-    },
+    preprocessors: preprocessor,
 
     coverageReporter: {
       dir : path.join(cwd, 'coverage'),
@@ -56,20 +94,17 @@ module.exports = function (config) {
         { type: 'lcov', subdir: 'report-lcov' },
         { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
       ],
-      //instrumenters: { isparta : require('isparta') },
-      //instrumenter: {
-      //  '**/*.js': 'isparta'
-      //},
+      instrumenters: {
+        isparta : require('isparta')
+      },
+      instrumenter: {
+        '/Users/silentcloud/Desktop/atool-test-testing/src/**/*.js': 'isparta'
+      },
     },
 
-    // TODO 替换 webpack 配置, 本地先写测试
-    webpack: {
+    webpack: webpackConfig,
+    /* webpack: {
       devtool: 'inline-source-map',
-      //output: {
-        // path: path.join(process.cwd(), './build/'),
-      //  path: 'build',
-      //  filename: 'test.js'
-      //},
       module: {
         //loaders: [
         //  { test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
@@ -94,7 +129,7 @@ module.exports = function (config) {
           }
         ]
       }
-    },
+    },*/
 
     webpackServer: {
       noInfo: true

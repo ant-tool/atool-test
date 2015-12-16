@@ -6,14 +6,13 @@ var spawn = require('child_process').spawn;
 
 commander
   .version(require('../package').version, '-v, --version')
-  .option('-w, --watch', 'watch test file changes and retest')
-  .option('-c, --coverage', 'code coverage')
+  .option('-t, --test-dir', 'basic tests dir')
   .parse(process.argv);
 
-//#require('../lib/test')(commander);
-
 var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
-var child = spawn('node_modules/.bin/karma', ['start', karma_config_file], { stdio: 'inherit' })
+var args = ['start', karma_config_file].concat(process.argv.slice(2));
+
+var child = spawn('node_modules/.bin/karma', args, { stdio: 'inherit' })
 
 child.on('exit', function (code, signal) {
   process.on('exit', function(){
