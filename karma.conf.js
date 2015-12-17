@@ -48,8 +48,9 @@ webpackConfig.plugins = [
 
 var base_test_dir = 'test';
 var testArgs = process.argv.slice(4);
-if (testArgs.length && testArgs[0] === '--test-dir') {
-  base_test_dir = testArgs[1];
+var testParam = testArgs.indexOf('--test-dir');
+if (testParam > -1) {
+  base_test_dir = testArgs[testParam + 1];
 }
 
 var files_to_test = path.resolve(cwd, './'+ base_test_dir +'/**/*-test.js');

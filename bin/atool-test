@@ -6,7 +6,8 @@ var spawn = require('child_process').spawn;
 
 commander
   .version(require('../package').version, '-v, --version')
-  .option('-t, --test-dir', 'basic tests dir')
+  .option('--test-dir', 'basic tests dir, default cwd/test')
+  .option('--port', 'The port where the webserver will be listening, default 9876')
   .parse(process.argv);
 
 var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
@@ -28,6 +29,8 @@ process.on('SIGINT', function () {
   child.kill('SIGINT');
   child.kill('SIGTERM');
 });
+
+
 
 
 
