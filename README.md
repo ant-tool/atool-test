@@ -12,7 +12,7 @@
  $ tnpm install
  $ cd testing-demo
  $ npm install
- $ npm run test
+ $ npm test
  ```
  
 ---
