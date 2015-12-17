@@ -22,7 +22,7 @@
     "babel-preset-react": "^6.1.18",
     "commander": "~2.9.0",
     "enzyme": "^1.1.0",
-    "expect": "^1.13.0",
+    "expect.js": "~0.3.1",
     "isparta": "~4.0.0",
     "isparta-loader": "^2.0.0",
     "karma": "^0.13.15",

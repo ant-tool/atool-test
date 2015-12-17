@@ -13,7 +13,9 @@ commander
 var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
 var args = ['start', karma_config_file].concat(process.argv.slice(2));
 
-var child = spawn('node_modules/.bin/karma', args, { stdio: 'inherit' })
+var karmaPath = path.resolve(__dirname, '../node_modules/.bin/karma');
+
+var child = spawn(karmaPath, args, { stdio: 'inherit' })
 
 child.on('exit', function (code, signal) {
   process.on('exit', function(){
@@ -29,8 +31,5 @@ process.on('SIGINT', function () {
   child.kill('SIGINT');
   child.kill('SIGTERM');
 });
-
-
-
 
 
