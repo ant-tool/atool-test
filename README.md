@@ -6,12 +6,14 @@
  
  工具调试:
  
+ ```
  $ git clone atool-test
  $ cd atool-test
  $ tnpm install
  $ cd testing-demo
  $ npm install
- $ npm run test
+ $ npm test
+ ```
  
 ---
 
