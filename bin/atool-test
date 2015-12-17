@@ -18,6 +18,9 @@ var karmaPath = path.resolve(__dirname, '../node_modules/.bin/karma');
 var child = spawn(karmaPath, args, { stdio: 'inherit' })
 
 child.on('exit', function (code, signal) {
+
+  require('../lib/coverage');
+
   process.on('exit', function(){
     if (signal) {
       process.kill(process.pid, signal);
