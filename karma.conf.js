@@ -25,7 +25,7 @@ module.exports = function (config) {
 
     singleRun: true,
 
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'sinon-chai'],
 
     files: [
       './phantomjs-polyfill.js',
@@ -39,7 +39,8 @@ module.exports = function (config) {
       require("karma-mocha-reporter"),
       require("karma-sourcemap-loader"),
       require("karma-phantomjs-launcher"),
-      require('karma-coverage')
+      require('karma-coverage'),
+      require('karma-sinon-chai')
     ],
 
     reporters: ['mocha', 'coverage'],

@@ -19,7 +19,6 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "~2.9.0",
-    "expect.js": "~0.3.1",
     "isparta": "~4.0.0",
     "isparta-loader": "^2.0.0",
     "karma": "^0.13.15",
@@ -27,6 +26,7 @@
     "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.2",
     "karma-phantomjs-launcher": "~0.2.1",
+    "karma-sinon-chai": "~1.1.0",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
@@ -36,6 +36,12 @@
     "webpack": "^1.12.9"
   },
   "peerDependencies": {
-    "atool-build": "~0.3.x"
+    "atool-build": "~0.4.2"
+  },
+  "scripts": {
+    "test": "./bin/atool-test --test-dir __test__"
+  },
+  "devDependencies": {
+    "eslint": "~1.10.3"
   }
 }
