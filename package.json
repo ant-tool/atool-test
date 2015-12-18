@@ -40,8 +40,5 @@
   },
   "scripts": {
     "test": "./bin/atool-test --test-dir __test__"
-  },
-  "devDependencies": {
-    "eslint": "~1.10.3"
   }
 }
