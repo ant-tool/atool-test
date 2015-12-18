@@ -1,20 +1,5 @@
 # atool-test
 
----
- 
- 工具调试:
- 
- ```
- $ git clone atool-test
- $ cd atool-test
- $ tnpm install
- $ cd testing-demo
- $ npm install
- $ npm test
- ```
- 
----
-
 ## 使用
 
 > 约定: 测试文件的文件名加 -test
