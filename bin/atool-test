@@ -13,14 +13,14 @@ commander
 var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
 var args = ['start', karma_config_file].concat(process.argv.slice(2));
 
+spawn('rm', ['-rf', 'coverage']);
+
 var karmaPath = path.resolve(__dirname, '../node_modules/.bin/karma');
 
 var child = spawn(karmaPath, args, { stdio: 'inherit' })
 
 child.on('exit', function (code, signal) {
-
   require('../lib/coverage');
-
   process.on('exit', function(){
     if (signal) {
       process.kill(process.pid, signal);
