@@ -35,10 +35,14 @@
     "react-addons-test-utils": "^0.14.3",
     "webpack": "^1.12.9"
   },
+  "devDependencies": {
+    "coveralls": "~2.11.4"
+  },
   "peerDependencies": {
     "atool-build": "~0.4.2"
   },
   "scripts": {
-    "test": "./bin/atool-test --test-dir __test__"
+    "test": "./bin/atool-test --test-dir __test__",
+    "coveralls": "cat ./coverage/report-lcov/lcov.info | coveralls"
   }
 }
