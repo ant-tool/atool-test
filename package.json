@@ -42,7 +42,7 @@
     "atool-build": "~0.4.2"
   },
   "scripts": {
-    "test": "./bin/atool-test --test-dir __test__",
+    "test": "./bin/atool-test --test-dir __tests__",
     "coveralls": "cat ./coverage/report-lcov/lcov.info | coveralls"
   }
 }

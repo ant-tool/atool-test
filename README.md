@@ -1,6 +1,5 @@
 # atool-test
 
-
 [![NPM version](https://img.shields.io/npm/v/atool-test.svg?style=flat)](https://npmjs.org/package/atool-test)
 [![Build Status](https://img.shields.io/travis/ant-tool/atool-test.svg?style=flat)](https://travis-ci.org/ant-tool/atool-test)
 [![Coverage Status](https://img.shields.io/coveralls/ant-tool/atool-test.svg?style=flat)](https://coveralls.io/r/ant-tool/atool-test)
@@ -28,8 +27,8 @@
   "test": "atool-test"
 }
 
-可以指定要测试的目录 atool-test --test-dir test
+可以指定要测试的目录 atool-test --test-dir tests
 
-默认测试目录为项目目录下的 __test__
+默认测试目录为项目目录下的 __tests__
 
 ```
