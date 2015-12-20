@@ -7,9 +7,10 @@
 
 ## 特性
 
-- 基于 mocha 实现
-- 内置 es2015, react, stage-0, mocha, chai, sinon 等常用测试工具类库 
-- 更专注于测试用例本身
+- 基于 karma 实现, 运行测试于浏览器端;
+- 内置 es2015, react, stage-0;
+- 内置 mocha, chai, sinon 等常用测试工具类库;
+- 更专注于写测试用例本身;
 
 ## 全局API
 
