@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var getTestWebpackConfig = require('./lib/getTestWebpackConfig');
 var webpackConfig = getTestWebpackConfig();
 
-var base_test_dir = '__test__';
+var base_test_dir = '__tests__';
 var testArgs = process.argv.slice(4);
 var testParam = testArgs.indexOf('--test-dir');
 if (testParam > -1) {
