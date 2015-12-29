@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Unit testing tool based on karma & webpack & mocha",
   "keywords": [
     "testing",
@@ -33,7 +33,8 @@
     "object-assign": "~4.0.1",
     "phantomjs": "~1.9.19",
     "react-addons-test-utils": "^0.14.3",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "jison-loader": "^1.0.0"
   },
   "devDependencies": {
     "coveralls": "~2.11.4"
