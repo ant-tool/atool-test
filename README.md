@@ -28,8 +28,4 @@
   "test": "atool-test"
 }
 
-可以指定要测试的目录 atool-test --test-dir tests
-
-默认测试目录为项目目录下的 __tests__
-
 ```
