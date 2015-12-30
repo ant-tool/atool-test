@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Unit testing tool based on karma & webpack & mocha",
   "keywords": [
     "testing",
