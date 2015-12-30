@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Unit testing tool based on karma & webpack & mocha",
   "keywords": [
     "testing",
@@ -43,7 +43,7 @@
     "atool-build": "~0.4.2"
   },
   "scripts": {
-    "test": "./bin/atool-test --test-dir __tests__",
+    "test": "./bin/atool-test",
     "coveralls": "cat ./coverage/report-lcov/lcov.info | coveralls"
   }
 }

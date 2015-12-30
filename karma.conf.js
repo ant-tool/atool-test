@@ -4,17 +4,8 @@ var webpack = require('webpack');
 var getTestWebpackConfig = require('./lib/getTestWebpackConfig');
 var webpackConfig = getTestWebpackConfig();
 
-var base_test_dir = '__tests__';
-var testArgs = process.argv.slice(4);
-var testParam = testArgs.indexOf('--test-dir');
-if (testParam > -1) {
-  base_test_dir = testArgs[testParam + 1];
-}
 // files to test
-var files_to_test = path.resolve(cwd, './'+ base_test_dir +'/**/*-test.js');
-var preprocessor = {};
-preprocessor[files_to_test] = ['webpack', 'sourcemap'];
-preprocessor['./lib/setup.js'] = ['webpack'];
+var files_to_test = path.resolve(cwd, './!(node_modules)/**/*-test.js');
 
 module.exports = function (config) {
   config.set({
@@ -45,7 +36,10 @@ module.exports = function (config) {
 
     reporters: ['mocha', 'coverage'],
 
-    preprocessors: preprocessor,
+    preprocessors: {
+      [files_to_test]: ['webpack', 'sourcemap'],
+      './lib/setup.js': ['webpack']
+    },
 
     // karma-coverage 不能在 terminal 输出 coverage 的同时,生成其他格式的 reporters
     coverageReporter: {
