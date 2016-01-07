@@ -20,7 +20,6 @@ module.exports = function (config) {
 
     files: [
       './phantomjs-polyfill.js',
-      './lib/setup.js',
       files_to_test,
     ],
 
@@ -37,8 +36,7 @@ module.exports = function (config) {
     reporters: ['mocha', 'coverage'],
 
     preprocessors: {
-      [files_to_test]: ['webpack', 'sourcemap'],
-      './lib/setup.js': ['webpack']
+      [files_to_test]: ['webpack', 'sourcemap']
     },
 
     // karma-coverage 不能在 terminal 输出 coverage 的同时,生成其他格式的 reporters
