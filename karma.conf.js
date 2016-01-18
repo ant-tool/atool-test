@@ -1,6 +1,5 @@
 var path = require('path');
 var cwd = process.cwd();
-var webpack = require('webpack');
 var getTestWebpackConfig = require('./lib/getTestWebpackConfig');
 var webpackConfig = getTestWebpackConfig();
 
@@ -30,8 +29,6 @@ module.exports = function (config) {
       require("karma-sourcemap-loader"),
       require("karma-phantomjs-launcher"),
       require("karma-chrome-launcher"),
-      require("karma-safari-launcher"),
-      require("karma-firefox-launcher"),
       require('karma-coverage'),
       require('karma-sinon-chai')
     ],
@@ -42,7 +39,6 @@ module.exports = function (config) {
       [files_to_test]: ['webpack', 'sourcemap']
     },
 
-    // karma-coverage 不能在 terminal 输出 coverage 的同时,生成其他格式的 reporters
     coverageReporter: {
       dir : path.join(cwd, 'coverage'),
       reporters: [

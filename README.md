@@ -33,4 +33,4 @@
 ##  参数
 
 - `--port`: 指定服务端口, 默认 9876;
-- `--browsers`: 指定浏览器测试, 逗号分隔, 提供 `Chrome,Firefox,Safari, PhantomJS`, 默认 PhantomJS
+- `--browsers`: 指定浏览器测试, 逗号分隔, 提供 `Chrome, PhantomJS`, 默认 PhantomJS

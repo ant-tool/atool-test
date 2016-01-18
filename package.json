@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Unit testing tool based on karma & webpack & mocha",
   "keywords": [
     "testing",
@@ -14,7 +14,7 @@
   "bin": {
     "atool-test": "./bin/atool-test"
   },
-  "author": "rjmuqiang@alipay.com",
+  "author": "rjmuqiang@gmail.com",
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
@@ -27,16 +27,12 @@
     "karma-mocha-reporter": "^1.1.2",
     "karma-phantomjs-launcher": "~0.2.3",
     "karma-chrome-launcher": "~0.2.2",
-    "karma-firefox-launcher": "~0.1.7",
-    "karma-safari-launcher": "~0.1.1",
     "karma-sinon-chai": "~1.1.0",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
     "object-assign": "~4.0.1",
-    "phantomjs": "~1.9.19",
-    "webpack": "^1.12.9",
-    "jison-loader": "^1.0.0"
+    "phantomjs": "~1.9.19"
   },
   "devDependencies": {
     "coveralls": "~2.11.4"
