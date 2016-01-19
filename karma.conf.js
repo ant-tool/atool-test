@@ -2,6 +2,15 @@ var path = require('path');
 var cwd = process.cwd();
 var getTestWebpackConfig = require('./lib/getTestWebpackConfig');
 var webpackConfig = getTestWebpackConfig();
+var confUtil = require('./lib/conf_util');
+
+var browserStr = confUtil.getValueFromArgv(process.argv, '--browsers');
+var browsers = browserStr && browserStr.split(',');
+var assertLibs = confUtil.getValueFromArgv(process.argv, '--assert');
+
+var frameworks = confUtil.getFrameworks(assertLibs);
+var launchers = confUtil.getBrowserLauncherPlugins(browsers);
+var assertPlugin = confUtil.getAssertLibraryPlugin(assertLibs);
 
 // files to test
 var files_to_test = path.resolve(cwd, './!(node_modules)/**/*-test.js');
@@ -15,7 +24,7 @@ module.exports = function (config) {
 
     singleRun: true,
 
-    frameworks: ['mocha', 'sinon-chai'],
+    frameworks: frameworks,
 
     files: [
       './phantomjs-polyfill.js',
@@ -27,11 +36,8 @@ module.exports = function (config) {
       require("karma-mocha"),
       require("karma-mocha-reporter"),
       require("karma-sourcemap-loader"),
-      require("karma-phantomjs-launcher"),
-      require("karma-chrome-launcher"),
-      require('karma-coverage'),
-      require('karma-sinon-chai')
-    ],
+      require('karma-coverage')
+    ].concat(launchers, assertPlugin),
 
     reporters: ['mocha', 'coverage'],
 

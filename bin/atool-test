@@ -8,8 +8,9 @@ var spawn = require('child_process').spawn;
 
 commander
   .version(require('../package').version, '-v, --version')
-  .option('--port', 'The port where the webserver will be listening, default 9876')
+  .option('-p, --port', 'The port where the webserver will be listening, default 9876')
   .option('--browsers', 'A list of browsers to launch and capture')
+  .option('--assert <expectjs, shouldjs, chaijs(default)>', 'assert library which you want to use')
   .parse(process.argv);
 
 var karma_config_file = path.resolve(__dirname, '../karma.conf.js');
