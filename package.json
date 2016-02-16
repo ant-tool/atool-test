@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Unit testing tool based on karma & webpack & mocha",
   "keywords": [
     "testing",
@@ -37,7 +37,7 @@
     "coveralls": "~2.11.4"
   },
   "peerDependencies": {
-    "atool-build": "~0.4.x"
+    "atool-build": "~0.5.x"
   },
   "scripts": {
     "test": "./bin/atool-test",
