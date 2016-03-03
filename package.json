@@ -1,5 +1,5 @@
 {
-  "name": "@alipay/atool-test",
+  "name": "atool-test",
   "version": "0.4.0",
   "description": "Unit testing tool based on dora & mocha & webpack",
   "keywords": [
