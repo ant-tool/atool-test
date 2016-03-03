@@ -16,7 +16,7 @@
     "atool-test": "./bin/atool-test"
   },
   "files": "lib",
-  "author": "rjmuqiang@alipay.com",
+  "author": "rjmuqiang@gmail.com",
   "license": "MIT",
   "repository": {
     "type": "git",
