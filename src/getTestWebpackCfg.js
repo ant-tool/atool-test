@@ -3,7 +3,6 @@ import glob from 'glob';
 import assign from 'object-assign';
 import getWebpackCommonConfig from 'atool-build/lib/getWebpackCommonConfig';
 import mergeCustomConfig from 'atool-build/lib/mergeCustomConfig';
-import getBabelCommonConfig from 'atool-build/lib/getBabelCommonConfig';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const cwd = process.cwd();
@@ -15,12 +14,7 @@ const commonConfig = getWebpackCommonConfig({
 const customConfigPath = join(cwd, 'webpack.config.js');
 
 const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
-  devtool: '#inline-source-map',
-  isparta: {
-    embedSource: true,
-    noAutoWrap: true,
-    babel: getBabelCommonConfig(),
-  },
+  devtool: '#inline-source-map'
 });
 
 const preLoaders = [
@@ -30,6 +24,8 @@ const preLoaders = [
     loader: 'isparta',
   },
 ];
+
+delete webpackConfig.babel.cacheDirectory;
 
 if (webpackConfig.module.preLoaders) {
   webpackConfig.module.preLoaders.concat(preLoaders);
@@ -43,7 +39,6 @@ webpackConfig.module.noParse = [
 
 webpackConfig.plugins.push(
   new HtmlWebpackPlugin({
-    filename: 'runner.html',
     template: join(__dirname, './runner.html'),
     inject: false,
   })
