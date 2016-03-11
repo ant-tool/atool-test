@@ -57,10 +57,7 @@ webpackConfig.externals = [];
 
 module.exports = function getTestWebpackCfg(assertLib) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
-  let setupFile = './setup.js';
-  if (assertLib !== 'undefined' && assertLib !== 'chaijs') {
-    setupFile = './setup_assert.js';
-  }
+  const setupFile = assertLib === 'chaijs' ? './setup.js' : './setup_assert.js';
   testFiles.splice(0, 0, join(__dirname, setupFile));
   webpackConfig.entry = {
     test: testFiles,

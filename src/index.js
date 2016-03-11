@@ -40,6 +40,8 @@ export default function(config, callback) {
         console.log(cyan('  You can see more detail in coverage/report-html/index.html'));
         console.log();
       }
+
+      if (!config.keep) callback(0);
     }).catch((err) => {
       callback(err.code);
     });

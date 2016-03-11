@@ -25,13 +25,14 @@
 with options:
 
 ```
-atool-test --port 9888 --assert shouldjs
+atool-test --port 9888 --assert shouldjs --keep
 ```
 
 ## Options
 
-- `--port`: server port, default is 9876;
-- `--assert`: run test with custom assert library <expectjs、shouldjs、chaijs(default)>
+- `-p, --port`: server port, default is 9876;
+- `-a, --assert`: run test with custom assert library <expectjs、shouldjs、chaijs(default)>
+- `-k, --keep`: keep process after tests, for browser test
 
 ## Custom Assert
 
