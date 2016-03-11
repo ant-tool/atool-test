@@ -1,0 +1,5 @@
+{
+  "entry": {
+    "test": ["./first-test.js"]
+  }
+}
