@@ -14,7 +14,7 @@ const commonConfig = getWebpackCommonConfig({
 const customConfigPath = join(cwd, 'webpack.config.js');
 
 const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
-  devtool: '#inline-source-map'
+  devtool: '#inline-source-map',
 });
 
 const preLoaders = [
