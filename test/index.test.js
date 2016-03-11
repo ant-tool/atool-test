@@ -60,10 +60,4 @@ describe('index.test: index test with no assert lib', function() {
         done();
       });
   });
-
-  it('coverage ok', function(done) {
-    var exist = fs.existsSync(join(cwd, './coverage'));
-    expect(exist).to.be.true;
-    done()
-  });
 });

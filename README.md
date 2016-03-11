@@ -20,7 +20,6 @@
 "srcipts": {
   "test": "atool-test"
 }
-
 ```
 
 with options:
