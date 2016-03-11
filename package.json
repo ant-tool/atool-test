@@ -14,7 +14,12 @@
   "bin": {
     "atool-test": "./bin/atool-test"
   },
-  "files": "lib",
+  "files": [
+    "bin",
+    "lib",
+    "package.json",
+    "README.md"
+  ],
   "author": "rjmuqiang@gmail.com",
   "license": "MIT",
   "repository": {
