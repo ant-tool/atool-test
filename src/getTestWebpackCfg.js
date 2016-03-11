@@ -37,6 +37,12 @@ webpackConfig.module.noParse = [
   /\/sinon\.js/,
 ];
 
+for (let i = 0; i < webpackConfig.plugins.length; i++) {
+  if (webpackConfig.plugins[i].chunkNames === 'common') {
+    webpackConfig.plugins.splice(i, 1);
+    break;
+  }
+}
 webpackConfig.plugins.push(
   new HtmlWebpackPlugin({
     template: join(__dirname, './runner.html'),
@@ -47,6 +53,7 @@ webpackConfig.plugins.push(
 webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.output.libraryTarget = 'var';
+webpackConfig.externals = [];
 
 module.exports = function getTestWebpackCfg(assertLib) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
