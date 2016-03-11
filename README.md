@@ -43,5 +43,5 @@ atool-test --port 9888 --assert shouldjs --keep
 
 ## Browser Test
 
-  Open `http://127.0.0.1:${port}/tests/runner.html` in your browser.
+  Run with `--keep` option, open `http://127.0.0.1:${port}/tests/runner.html` in your browser.
 
