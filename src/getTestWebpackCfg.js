@@ -15,6 +15,7 @@ const customConfigPath = join(cwd, 'webpack.config.js');
 
 const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
   devtool: '#inline-source-map',
+  externals: []
 });
 
 const preLoaders = [
@@ -53,7 +54,6 @@ webpackConfig.plugins.push(
 webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.output.libraryTarget = 'var';
-webpackConfig.externals = [];
 
 module.exports = function getTestWebpackCfg(assertLib) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
