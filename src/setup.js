@@ -1,8 +1,12 @@
 require('mocha/mocha.css');
 
-window.expect = require('chai').expect;
-window.should = require('chai').should;
+var chai = require('chai');
 
-window.sinon = require('sinon/pkg/sinon');
+global.expect = chai.expect;
+// https://github.com/chaijs/chai/issues/107
+global.should = undefined;
+global.should = chai.should();
+
+global.sinon = require('sinon/pkg/sinon');
 
 require('sinon-chai');

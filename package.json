@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Unit testing tool based on dora & mocha & webpack",
   "keywords": [
     "testing",

@@ -1,3 +1,3 @@
 require('mocha/mocha.css');
 
-window.sinon = require('sinon/pkg/sinon');
+global.sinon = require('sinon/pkg/sinon');
