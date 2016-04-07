@@ -17,9 +17,9 @@ export default function(config, callback) {
     const mochaPhantomBin = join(require.resolve('mocha-phantomjs'), '../../bin/mocha-phantomjs');
     const hook = join(__dirname, './coverageHook.js');
     const cmds = [`${mochaPhantomBin} ${url}?cov --hooks ${hook}`];
-    const istanbulBin = join(require.resolve('istanbul'), '../../.bin/istanbul');
+    let istanbulBin = require.resolve('istanbul/lib/cli.js');
 
-    cmds.push(`${istanbulBin} report lcov json-summary --include coverage/coverage.json`);
+    cmds.push(`node ${istanbulBin} report lcov json-summary --include coverage/coverage.json`);
 
     exeq.apply(this, cmds).then(() => {
       console.log();
