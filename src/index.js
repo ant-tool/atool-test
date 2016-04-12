@@ -37,7 +37,7 @@ export default function(config, callback) {
           }
         }
         console.log();
-        console.log(cyan('  You can see more detail in coverage/report-html/index.html'));
+        console.log(cyan('  You can see more detail in coverage/lcov-report/index.html'));
         console.log();
       }
 
