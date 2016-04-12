@@ -6,13 +6,13 @@ var cwd = process.cwd();
 program
   .version(require('../package').version, '-v, --version')
   .option('-p, --port <n>', 'server port. Default: 9876')
-  .option('-a, --assert <expectjs, shouldjs, chaijs(default)>', 'assert library which you want to use')
+  .option('--no-chai', 'run tests with custom assert library')
   .option('-k, --keep', 'keep process after tests')
   .parse(process.argv);
 
 require('../lib')({
   port: program.port || '9876',
-  assert: program.assert|| 'chaijs',
+  chai: !program.chai || false,
   keep: program.keep || false
 }, function(code) {
   process.exit(code);

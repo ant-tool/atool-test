@@ -14,7 +14,7 @@
 
 ## Usage
 
->  Add `-test.js` suffix with your test files
+>  Add `-test.js` or `-spec.js` suffix with your test files
 
 ```
 "srcipts": {
@@ -31,15 +31,21 @@ atool-test --port 9888 --assert shouldjs --keep
 ## Options
 
 - `-p, --port`: server port, default is 9876;
-- `-a, --assert`: run test with custom assert library <expectjs、shouldjs、chaijs(default)>
-- `-k, --keep`: keep process after tests, for browser test
+- `--no-chai`: run test with custom assert library;
+- `-k, --keep`: keep process after tests, for browser test;
 
 ## Custom Assert
 
->  atool-test --assert expectjs
+>  atool-test --no-chai
 
 - expectjs: `npm install expect.js --save-dev`
 - shouldjs: `npm install should --save-dev`
+
+```
+// test code
+import expect from 'expect.js';
+ 
+```
 
 ## Browser Test
 

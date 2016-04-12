@@ -55,12 +55,13 @@ webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules')
 webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.output.libraryTarget = 'var';
 
-module.exports = function getTestWebpackCfg(assertLib) {
+module.exports = function getTestWebpackCfg(noChai) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
-  const setupFile = assertLib === 'chaijs' ? './setup.js' : './setup_assert.js';
+  const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
+  const setupFile = noChai ? './setup.js' : './setup_chai.js';
   testFiles.splice(0, 0, join(__dirname, setupFile));
   webpackConfig.entry = {
-    test: testFiles,
+    test: testFiles.concat(specFiles),
     mocha: join(require.resolve('mocha'), '../mocha.js'),
   };
   return webpackConfig;

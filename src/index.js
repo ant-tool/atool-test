@@ -10,7 +10,7 @@ const cwd = process.cwd();
 export default function(config, callback) {
   server(assign({}, config, {
     plugins: [
-      join(__dirname, `./build?assert=${config.assert}`),
+      join(__dirname, `./build?chai=${config.chai}`),
     ],
   }), () => {
     const url = `http://127.0.0.1:${config.port}/tests/runner.html`;
