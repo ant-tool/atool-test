@@ -6,7 +6,8 @@ let webpackConfig;
 
 export default {
   'middleware.before'() {
-    webpackConfig = getTestWebpackCfg(this.query.chai);
+    const { chai, coverage} = this.query;
+    webpackConfig = getTestWebpackCfg(chai, coverage);
     webpackConfig.plugins.push(
       new ProgressPlugin((percentage, msg) => {
         const stream = process.stderr;

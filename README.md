@@ -5,6 +5,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/ant-tool/atool-test.svg?style=flat)](https://coveralls.io/r/ant-tool/atool-test)
 [![NPM downloads](http://img.shields.io/npm/dm/atool-test.svg?style=flat)](https://npmjs.org/package/atool-test)
 
+Simple configuration, makes you focus more on the writing tests.
 
 ## Built-in
 
@@ -25,13 +26,14 @@
 with options:
 
 ```
-atool-test --port 9888 --assert shouldjs --keep
+atool-test --port 9888 --no-chai --no-coverage --keep
 ```
 
 ## Options
 
 - `-p, --port`: server port, default is 9876;
 - `--no-chai`: run test with custom assert library;
+- `--no-coverage`: without coverage output;
 - `-k, --keep`: keep process after tests, for browser test;
 
 ## Custom Assert
@@ -47,7 +49,7 @@ import expect from 'expect.js';
  
 ```
 
-## Browser Test
+## Browser Test & Debug
 
-  Run with `--keep` option, open `http://127.0.0.1:${port}/tests/runner.html` in your browser.
+  Run with `--keep && --no-coverage` option, open `http://127.0.0.1:${port}/tests/runner.html` in your browser.
 

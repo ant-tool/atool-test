@@ -7,13 +7,15 @@ program
   .version(require('../package').version, '-v, --version')
   .option('-p, --port <n>', 'server port. Default: 9876')
   .option('--no-chai', 'run tests with custom assert library')
+  .option('--no-coverage', 'without coverage')
   .option('-k, --keep', 'keep process after tests')
   .parse(process.argv);
 
 require('../lib')({
   port: program.port || '9876',
-  chai: !program.chai || false,
-  keep: program.keep || false
+  chai: program.chai,
+  keep: program.keep,
+  coverage: program.coverage
 }, function(code) {
   process.exit(code);
 });

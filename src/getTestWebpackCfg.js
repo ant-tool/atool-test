@@ -18,21 +18,7 @@ const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPat
   externals: []
 });
 
-const preLoaders = [
-  {
-    test: /\.jsx?$/,
-    exclude: /(__tests__|tests|node_modules|bower_components)/,
-    loader: 'isparta',
-  },
-];
-
 delete webpackConfig.babel.cacheDirectory;
-
-if (webpackConfig.module.preLoaders) {
-  webpackConfig.module.preLoaders.concat(preLoaders);
-} else {
-  webpackConfig.module.preLoaders = preLoaders;
-}
 
 webpackConfig.module.noParse = [
   /\/sinon\.js/,
@@ -55,11 +41,27 @@ webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules')
 webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
 webpackConfig.output.libraryTarget = 'var';
 
-module.exports = function getTestWebpackCfg(noChai) {
+module.exports = function getTestWebpackCfg(chai, coverage) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
   const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
-  const setupFile = noChai ? './setup.js' : './setup_chai.js';
+  const setupFile = chai ? './setup_chai.js' : './setup.js';
   testFiles.splice(0, 0, join(__dirname, setupFile));
+
+  if (coverage) {
+    const preLoaders = [
+      {
+        test: /\.jsx?$/,
+        exclude: /(__tests__|tests|node_modules|bower_components)/,
+        loader: 'isparta',
+      },
+    ];
+    if (webpackConfig.module.preLoaders) {
+      webpackConfig.module.preLoaders.concat(preLoaders);
+    } else {
+      webpackConfig.module.preLoaders = preLoaders;
+    }
+  }
+
   webpackConfig.entry = {
     test: testFiles.concat(specFiles),
     mocha: join(require.resolve('mocha'), '../mocha.js'),
