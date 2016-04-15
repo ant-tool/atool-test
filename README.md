@@ -32,8 +32,8 @@ atool-test --port 9888 --no-chai --no-coverage --keep
 ## Options
 
 - `-p, --port`: server port, default is 9876;
-- `--no-chai`: run test with custom assert library;
 - `--no-coverage`: without coverage output;
+- `--no-chai`: run test without chai;
 - `-k, --keep`: keep process after tests, for browser test;
 
 ## Custom Assert
