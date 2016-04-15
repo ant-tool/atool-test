@@ -25,7 +25,7 @@
 with options:
 
 ```
-atool-test --port 9888 --assert shouldjs --keep
+atool-test --port 9888 --no-chai --keep
 ```
 
 ## Options
