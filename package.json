@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/ant-tool/atool-test",
   "dependencies": {
+    "atool-monitor": "0.x",
     "chai": "~3.5.0",
     "chalk": "^1.1.1",
     "commander": "~2.9.0",
@@ -36,6 +37,7 @@
     "html-webpack-plugin": "^2.9.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "~0.4.2",
+    "koa-router": "^5.4.0",
     "koa-webpack-dev-middleware": "^1.1.0",
     "mocha": "^2.4.5",
     "mocha-phantomjs": "^4.0.2",

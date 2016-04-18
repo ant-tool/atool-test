@@ -11,37 +11,38 @@ const commonConfig = getWebpackCommonConfig({
   cwd: process.cwd(),
 });
 
-const customConfigPath = join(cwd, 'webpack.config.js');
+module.exports = function getTestWebpackCfg(chai, coverage, config) {
 
-const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
-  devtool: '#inline-source-map',
-  externals: []
-});
+  const customConfigPath = join(cwd, config);
 
-delete webpackConfig.babel.cacheDirectory;
+  const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
+    devtool: '#inline-source-map',
+    externals: []
+  });
 
-webpackConfig.module.noParse = [
-  /\/sinon\.js/,
-];
+  delete webpackConfig.babel.cacheDirectory;
 
-for (let i = 0; i < webpackConfig.plugins.length; i++) {
-  if (webpackConfig.plugins[i].chunkNames === 'common') {
-    webpackConfig.plugins.splice(i, 1);
-    break;
+  webpackConfig.module.noParse = [
+    /\/sinon\.js/,
+  ];
+
+  for (let i = 0; i < webpackConfig.plugins.length; i++) {
+    if (webpackConfig.plugins[i].chunkNames === 'common') {
+      webpackConfig.plugins.splice(i, 1);
+      break;
+    }
   }
-}
-webpackConfig.plugins.push(
-  new HtmlWebpackPlugin({
-    template: join(__dirname, './runner.html'),
-    inject: false,
-  })
-);
+  webpackConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      template: join(__dirname, './runner.html'),
+      inject: false,
+    })
+  );
 
-webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules'));
-webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
-webpackConfig.output.libraryTarget = 'var';
+  webpackConfig.resolve.modulesDirectories.push(join(__dirname, '../node_modules'));
+  webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
+  webpackConfig.output.libraryTarget = 'var';
 
-module.exports = function getTestWebpackCfg(chai, coverage) {
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
   const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
   const setupFile = chai ? './setup_chai.js' : './setup.js';
