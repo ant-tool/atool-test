@@ -35,6 +35,7 @@ atool-test --port 9888 --no-chai --no-coverage --keep
 - `--no-coverage`: without coverage output;
 - `--no-chai`: run test without chai;
 - `-k, --keep`: keep process after tests, for browser test;
+- `--config <path>`: custom config path, default is webpack.config.js';
 
 ## Custom Assert
 
