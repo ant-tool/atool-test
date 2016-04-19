@@ -49,9 +49,13 @@ export default {
     chokidar.watch(['**/*-test.js', '**/*-spec.js'], {
       ignored: /node_modules/,
       ignoreInitial: true
-    }).on('add', () => {
+    }).on('add', (path) => {
+      console.log();
+      console.log(`atool-test: File ${path} has been added, restart...`);
       process.send('restart');
-    }).on('unlink', () => {
+    }).on('unlink', (path) => {
+      console.log();
+      console.log(`atool-test: File ${path} has been removed, restart...`);
       process.send('restart');
     });
   }
