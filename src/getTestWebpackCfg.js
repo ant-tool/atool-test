@@ -44,7 +44,7 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   webpackConfig.output.libraryTarget = 'var';
 
   const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
-  const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
+    const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
   const setupFile = chai ? './setup_chai.js' : './setup.js';
   testFiles.splice(0, 0, join(__dirname, setupFile));
 

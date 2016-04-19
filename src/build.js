@@ -1,6 +1,7 @@
-import assign from 'object-assign';
 import webpack, { ProgressPlugin } from 'atool-build/lib/webpack';
 import getTestWebpackCfg from './getTestWebpackCfg';
+import chokidar from 'chokidar';
+import { join } from 'path';
 
 let webpackConfig;
 
@@ -32,9 +33,26 @@ export default {
         }));
       }
     });
-    return require('koa-webpack-dev-middleware')(compiler, assign({
+    return require('koa-webpack-dev-middleware')(compiler, {
       publicPath: '/tests',
-      quiet: true,
-    }, this.query));
+      quiet: true
+    });
   },
+
+  'server.after'() {
+    const { cwd, query } = this;
+    const webpackConfigPath = join(cwd, query.config);
+    chokidar.watch(webpackConfigPath).on('change', () => {
+      this.restart();
+    });
+
+    chokidar.watch(['**/*-test.js', '**/*-spec.js'], {
+      ignored: /node_modules/,
+      ignoreInitial: true
+    }).on('add', () => {
+      process.send('restart');
+    }).on('unlink', () => {
+      process.send('restart');
+    });
+  }
 };

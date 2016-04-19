@@ -7,7 +7,7 @@ import { green, gray, cyan, yellow } from 'chalk';
 
 const cwd = process.cwd();
 
-export default function(config, callback) {
+export default function(config) {
   server(assign({}, config, {
     plugins: [
       join(__dirname, `./build?chai=${config.chai}&coverage=${config.coverage}&config=${config.config}`),
@@ -28,6 +28,9 @@ export default function(config, callback) {
     }
 
     exeq.apply(this, cmds).then(() => {
+      console.log();
+      config.keep && console.log(yellow(`  Testing on http://127.0.0.1:${config.port}/tests/runner.html`));
+
       if (config.coverage) {
         const summaryFile = join(cwd, 'coverage/coverage-summary.json');
         if (fs.existsSync(summaryFile)) {
@@ -47,10 +50,10 @@ export default function(config, callback) {
         }
       }
 
-      if (!config.keep) callback(0);
+      if (!config.keep) process.exit(0);
 
     }).catch((err) => {
-      callback(err.code);
+      if (!config.keep) process.exit(err.code);
     });
   });
 }

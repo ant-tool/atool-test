@@ -1,25 +1,39 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var cwd = process.cwd();
+var cp = require('child_process');
 
-program
-  .version(require('../package').version, '-v, --version')
-  .option('-p, --port <n>', 'server port. Default: 9876')
-  .option('--no-chai', 'run tests with custom assert library')
-  .option('--no-coverage', 'without coverage')
-  .option('-k, --keep', 'keep process after tests')
-  .option('--config <path>', 'custom config path, default is webpack.config.js')
-  .parse(process.argv);
+function start() {
+  const p = cp.fork(__dirname + '/atool-test', process.argv.slice(2));
+  p.on('message', function(data) {
+    if (data === 'restart') {
+      p.kill('SIGINT');
+      start();
+    }
+  });
+}
 
-require('../lib')({
-  port: program.port || '9876',
-  chai: program.chai,
-  keep: program.keep,
-  coverage: program.coverage,
-  config: program.config || 'webpack.config.js'
-}, function(code) {
-  process.exit(code);
-});
+if (!process.send) {
+  start();
+} else {
+  var program = require('commander');
+  var cwd = process.cwd();
 
-require('atool-monitor').emit();
+  program
+    .version(require('../package').version, '-v, --version')
+    .option('-p, --port <n>', 'server port. Default: 9876')
+    .option('--no-chai', 'run tests with custom assert library')
+    .option('--no-coverage', 'without coverage')
+    .option('-k, --keep', 'keep process after tests')
+    .option('--config <path>', 'custom config path, default is webpack.config.js')
+    .parse(process.argv);
+
+  require('../lib')({
+    port: program.port || '9876',
+    chai: program.chai,
+    keep: program.keep,
+    coverage: program.coverage,
+    config: program.config || 'webpack.config.js'
+  });
+
+  require('atool-monitor').emit();
+}

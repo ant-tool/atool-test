@@ -1,6 +1,6 @@
 {
   "name": "atool-test",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Unit testing tool based on dora & mocha & webpack",
   "keywords": [
     "testing",
@@ -31,6 +31,7 @@
     "atool-monitor": "0.x",
     "chai": "~3.5.0",
     "chalk": "^1.1.1",
+    "chokidar": "^1.4.3",
     "commander": "~2.9.0",
     "exeq": "^2.4.0",
     "glob": "^7.0.0",
@@ -57,7 +58,6 @@
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "isparta": "~4.0.0",
-    "request": "~2.69.0",
     "supertest": "~1.2.0"
   },
   "peerDependencies": {
@@ -66,6 +66,7 @@
   },
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib && cp src/runner.html lib/runner.html",
+    "build-watch": "babel -w src --out-dir lib && cp src/runner.html lib/runner.html",
     "lint": "eslint src",
     "prepublish": "npm run build",
     "test": "npm run build && istanbul cover ./node_modules/.bin/_mocha -- --no-timeouts",
