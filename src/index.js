@@ -11,7 +11,7 @@ export default function(config) {
   server(assign({}, config, {
     plugins: [
       join(__dirname, `./build?chai=${config.chai}&coverage=${config.coverage}&config=${config.config}`),
-      join(__dirname, './rewrite')
+      join(__dirname, './rewrite'),
     ],
   }), () => {
     const url = `http://127.0.0.1:${config.port}/tests/runner.html`;
@@ -29,7 +29,9 @@ export default function(config) {
 
     exeq.apply(this, cmds).then(() => {
       console.log();
-      config.keep && console.log(yellow(`  Testing on http://127.0.0.1:${config.port}/tests/runner.html`));
+      if (config.keep) {
+        console.log(yellow(`  Testing on http://127.0.0.1:${config.port}/tests/runner.html`));
+      }
 
       if (config.coverage) {
         const summaryFile = join(cwd, 'coverage/coverage-summary.json');
@@ -51,7 +53,6 @@ export default function(config) {
       }
 
       if (!config.keep) process.exit(0);
-
     }).catch((err) => {
       if (!config.keep) process.exit(err.code);
     });

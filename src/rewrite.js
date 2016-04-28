@@ -5,5 +5,5 @@ router.redirect('/', '/tests/runner.html');
 export default {
   'middleware'() {
     return router.routes();
-  }
-}
+  },
+};

@@ -7,17 +7,14 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const cwd = process.cwd();
 
-const commonConfig = getWebpackCommonConfig({
-  cwd: process.cwd(),
-});
+const commonConfig = getWebpackCommonConfig({ cwd });
 
 module.exports = function getTestWebpackCfg(chai, coverage, config) {
-
   const customConfigPath = join(cwd, config);
 
   const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
     devtool: '#inline-source-map',
-    externals: []
+    externals: [],
   });
 
   delete webpackConfig.babel.cacheDirectory;
@@ -43,16 +40,11 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
   webpackConfig.output.libraryTarget = 'var';
 
-  const testFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-test.js'));
-    const specFiles = glob.sync(join(process.cwd(), '!(node_modules)/**/*-spec.js'));
-  const setupFile = chai ? './setup_chai.js' : './setup.js';
-  testFiles.splice(0, 0, join(__dirname, setupFile));
-
   if (coverage) {
     const preLoaders = [
       {
         test: /\.jsx?$/,
-        exclude: /(__tests__|tests|node_modules|bower_components)/,
+        exclude: /(__tests__|tests|test|node_modules|bower_components)/,
         loader: 'isparta',
       },
     ];
@@ -63,9 +55,24 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
     }
   }
 
+  let testsFile = [join(__dirname, chai ? './setup_chai.js' : './setup.js')];
+
+  // test some test-files
+  const entryFiles = webpackConfig.entry;
+  if (entryFiles && entryFiles.length) {
+    entryFiles.forEach(f => {
+      testsFile.push(join(cwd, f));
+    });
+  } else {
+    const testSuffixFiles = glob.sync(join(cwd, '!(node_modules)/**/*-test.js'));
+    const specSuffixFiles = glob.sync(join(cwd, '!(node_modules)/**/*-spec.js'));
+    testsFile = testsFile.concat(testSuffixFiles, specSuffixFiles);
+  }
+
   webpackConfig.entry = {
-    test: testFiles.concat(specFiles),
+    test: testsFile,
     mocha: join(require.resolve('mocha'), '../mocha.js'),
   };
+
   return webpackConfig;
 };

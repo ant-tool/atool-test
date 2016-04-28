@@ -1,5 +1,9 @@
 # History
 
+## 0.4.11
+
+- 支持指定测试文件, 配置 webpack.config.js 的 entry = [...];
+
 ## 0.4.10
 - `--no-coverage & --keep`: 参数支持，方便基于测试代码进行浏览器端调试；
 - `--config <path>`: 自定义 webpack config 文件名支持;

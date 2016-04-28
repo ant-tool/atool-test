@@ -1,6 +1,6 @@
 require('mocha/mocha.css');
 
-var chai = require('chai');
+const chai = require('chai');
 
 global.expect = chai.expect;
 // https://github.com/chaijs/chai/issues/107

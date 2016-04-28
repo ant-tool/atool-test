@@ -35,7 +35,7 @@ export default {
     });
     return require('koa-webpack-dev-middleware')(compiler, {
       publicPath: '/tests',
-      quiet: true
+      quiet: true,
     });
   },
 
@@ -48,7 +48,7 @@ export default {
 
     chokidar.watch(['**/*-test.js', '**/*-spec.js'], {
       ignored: /node_modules/,
-      ignoreInitial: true
+      ignoreInitial: true,
     }).on('add', (path) => {
       console.log();
       console.log(`atool-test: File ${path} has been added, restart...`);
@@ -58,5 +58,5 @@ export default {
       console.log(`atool-test: File ${path} has been removed, restart...`);
       process.send('restart');
     });
-  }
+  },
 };
