@@ -1,5 +1,9 @@
 # History
 
+## 0.4.12
+
+- 指定测试文件支持 glob 形式文件 [#16](https://github.com/ant-tool/atool-test/issues/16);
+
 ## 0.4.11
 
 - 支持指定测试文件, 配置 webpack.config.js 的 entry = [...];

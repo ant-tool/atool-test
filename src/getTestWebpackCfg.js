@@ -61,7 +61,8 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   const entryFiles = webpackConfig.entry;
   if (entryFiles && entryFiles.length) {
     entryFiles.forEach(f => {
-      testsFile.push(join(cwd, f));
+      const files = glob.sync(join(cwd, f));
+      testsFile.push.apply(testsFile, files);
     });
   } else {
     const testSuffixFiles = glob.sync(join(cwd, '!(node_modules)/**/*-test.js'));
@@ -70,7 +71,7 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   }
 
   webpackConfig.entry = {
-    test: testsFile,
+    test: Array.from(new Set(testsFile)),
     mocha: join(require.resolve('mocha'), '../mocha.js'),
   };
 

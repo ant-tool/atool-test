@@ -55,10 +55,12 @@ If you want to test with part of files, custom `cwd/webpack.config.js`:
 
 ```
 module.exports = function(webpackConfig) {
-  webpackConfig.entry = ['./tests/moduleA-test.js', './tests/moduleB-spec.js'];
+  webpackConfig.entry = ['./tests/moduleA-test.js', './tests/**/*-spec.js'];
   return webpackConfig;
 };
 ```
+
+support glob files;
 
 
 ## Browser Test & Debug
