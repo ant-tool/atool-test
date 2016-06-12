@@ -62,6 +62,23 @@ module.exports = function(webpackConfig) {
 
 support glob files;
 
+## Html Extra Files
+
+custom `cwd/webpack.config.js`:
+
+```
+module.exports = function(webpackConfig) {
+  webpackConfig.htmlWebpackPlugin = {
+    files: {
+      js: ['xx.js'],
+      css: ['xx.css']
+    }
+  };
+  return webpackConfig;
+};
+
+base file path: `/tests`
+
 
 ## Browser Test & Debug
 

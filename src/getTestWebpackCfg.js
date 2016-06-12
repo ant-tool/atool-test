@@ -29,10 +29,17 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
       break;
     }
   }
+
+  const htmlPluginFiles = webpackConfig.htmlWebpackPlugin && webpackConfig.htmlWebpackPlugin.files || {};
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
-      template: join(__dirname, './runner.html'),
+      template: join(__dirname, './runner.ejs'),
       inject: false,
+      filename: 'runner.html',
+      files: {
+        css: htmlPluginFiles.css || [],
+        js: htmlPluginFiles.js || [],
+      }
     })
   );
 
