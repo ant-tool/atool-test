@@ -14,6 +14,7 @@
 <% } %>
 <script src="/tests/mocha.js"></script>
 <script>
+  window.initMochaPhantomJS && window.initMochaPhantomJS();
   mocha.ui('bdd')
 </script>
 <script src="/tests/test.js"></script>

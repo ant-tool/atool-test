@@ -20,11 +20,11 @@ export default function(config) {
     const cmds = [];
     if (config.coverage) {
       const hook = join(__dirname, './coverageHook.js');
-      cmds.push([`${mochaPhantomBin} ${url}?cov --hooks ${hook}`]);
+      cmds.push([`${mochaPhantomBin} --ignore-resource-errors ${url}?cov --hooks ${hook}`]);
       const istanbulBin = require.resolve('istanbul/lib/cli.js');
       cmds.push(`node ${istanbulBin} report lcov json-summary --include coverage/coverage.json`);
     } else {
-      cmds.push([`${mochaPhantomBin} ${url}`]);
+      cmds.push([`${mochaPhantomBin} --ignore-resource-errors ${url}`]);
     }
 
     exeq.apply(this, cmds).then(() => {
