@@ -35,7 +35,7 @@
     "commander": "~2.9.0",
     "exeq": "^2.4.0",
     "glob": "^7.0.0",
-    "html-webpack-plugin": "^2.9.0",
+    "html-webpack-plugin": "^2.20.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "~0.4.2",
     "koa-router": "^5.4.0",
@@ -63,8 +63,8 @@
     "supertest": "~1.2.0"
   },
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib && cp src/runner.html lib/runner.html",
-    "build-watch": "babel -w src --out-dir lib && cp src/runner.html lib/runner.html",
+    "build": "rm -rf lib && babel src --out-dir lib && cp src/runner.ejs lib/runner.ejs",
+    "build-watch": "babel -w src --out-dir lib",
     "lint": "eslint src",
     "prepublish": "npm run build",
     "test": "npm run build && istanbul cover ./node_modules/.bin/_mocha -- --no-timeouts",

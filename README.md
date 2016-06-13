@@ -3,9 +3,8 @@
 [![NPM version](https://img.shields.io/npm/v/atool-test.svg?style=flat)](https://npmjs.org/package/atool-test)
 [![Build Status](https://img.shields.io/travis/ant-tool/atool-test.svg?style=flat)](https://travis-ci.org/ant-tool/atool-test)
 [![Coverage Status](https://img.shields.io/coveralls/ant-tool/atool-test.svg?style=flat)](https://coveralls.io/r/ant-tool/atool-test)
-[![NPM downloads](http://img.shields.io/npm/dm/atool-test.svg?style=flat)](https://npmjs.org/package/atool-test)
 
-Simple configuration, makes you focus more on the writing tests.
+Simple configuration, focus more on the writing tests.
 
 ## Built-in
 
@@ -61,6 +60,23 @@ module.exports = function(webpackConfig) {
 ```
 
 support glob files;
+
+## Html Extra Files
+
+custom `cwd/webpack.config.js`:
+
+```
+module.exports = function(webpackConfig) {
+  webpackConfig.htmlWebpackPlugin = {
+    files: {
+      js: ['xx.js'],
+      css: ['xx.css']
+    }
+  };
+  return webpackConfig;
+};
+```
+base file path: `/tests`
 
 
 ## Browser Test & Debug
