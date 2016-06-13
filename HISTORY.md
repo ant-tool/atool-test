@@ -1,5 +1,9 @@
 # History
 
+## 0.4.13
+
+- runner.html 增加额外 js、css 文件支持
+
 ## 0.4.12
 
 - 指定测试文件支持 glob 形式文件 [#16](https://github.com/ant-tool/atool-test/issues/16);
