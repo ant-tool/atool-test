@@ -1,5 +1,9 @@
 # History
 
+## 0.4.14
+
+- [`fix bug`]runner.html remove cdn mocha
+
 ## 0.4.13
 
 - runner.html 增加额外 js、css 文件支持
