@@ -1,5 +1,9 @@
 # History
 
+## 0.4.16
+
+- update dependencies
+
 ## 0.4.15
 
 - [`fix bug`]custom webpackConfig externals
