@@ -1,5 +1,9 @@
 # History
 
+## 0.4.15
+
+- [`fix bug`]custom webpackConfig externals
+
 ## 0.4.14
 
 - [`fix bug`]runner.html remove cdn mocha

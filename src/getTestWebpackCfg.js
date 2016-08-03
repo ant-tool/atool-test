@@ -14,7 +14,6 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
 
   const webpackConfig = assign({}, mergeCustomConfig(commonConfig, customConfigPath), {
     devtool: '#inline-source-map',
-    externals: [],
   });
 
   delete webpackConfig.babel.cacheDirectory;
