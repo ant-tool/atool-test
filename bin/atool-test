@@ -25,6 +25,7 @@ if (!process.send) {
     .option('--no-coverage', 'without coverage')
     .option('-k, --keep', 'keep process after tests')
     .option('--config <path>', 'custom config path, default is webpack.config.js')
+    .option('-t, --timeout <timeout>', 'specify the test startup timeout to use')
     .parse(process.argv);
 
   require('../lib')({
@@ -32,7 +33,8 @@ if (!process.send) {
     chai: program.chai,
     keep: program.keep,
     coverage: program.coverage,
-    config: program.config || 'webpack.config.js'
+    config: program.config || 'webpack.config.js',
+    timeout: program.timeout || 6000,
   });
 
   require('atool-monitor').emit();
