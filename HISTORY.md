@@ -1,5 +1,9 @@
 # History
 
+## 0.4.17
+
+- add babel-polyfill
+
 ## 0.4.16
 
 - update dependencies

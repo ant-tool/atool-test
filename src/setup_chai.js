@@ -10,3 +10,5 @@ global.should = chai.should();
 global.sinon = require('sinon/pkg/sinon');
 
 require('sinon-chai');
+
+require('babel-polyfill');
