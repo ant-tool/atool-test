@@ -1,5 +1,9 @@
 # History
 
+## 0.4.18
+
+- [`new`] support timeout option
+
 ## 0.4.17
 
 - add babel-polyfill

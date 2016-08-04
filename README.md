@@ -35,6 +35,7 @@ atool-test --port 9888 --no-chai --no-coverage --keep
 - `--no-chai`: run test without chai;
 - `-k, --keep`: keep process after tests, for browser test;
 - `--config <path>`: custom config path, default is webpack.config.js';
+- `-t, --timeout <timeout ms>`: specify the test startup timeout(ms) to use;
 
 ## Custom Assert
 
@@ -82,4 +83,3 @@ base file path: `/tests`
 ## Browser Test & Debug
 
   Run with `--keep && --no-coverage` option, open `http://127.0.0.1:${port}/tests/runner.html` in your browser.
-
