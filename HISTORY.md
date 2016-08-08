@@ -1,5 +1,9 @@
 # History
 
+## 0.5.0
+
+- [`change`] use `webpackConfig.atoolTestSpec` to support part of test case
+
 ## 0.4.18
 
 - [`new`] support timeout option

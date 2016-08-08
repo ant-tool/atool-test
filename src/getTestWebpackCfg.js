@@ -61,23 +61,22 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
     }
   }
 
-  let testsFile = [join(__dirname, chai ? './setup_chai.js' : './setup.js')];
+  let testFiles = [join(__dirname, chai ? './setup_chai.js' : './setup.js')];
 
   // test some test-files
-  const entryFiles = webpackConfig.entry;
+  const entryFiles = webpackConfig.atoolTestSpec;
   if (entryFiles && entryFiles.length) {
     entryFiles.forEach(f => {
       const files = glob.sync(join(cwd, f));
-      testsFile.push.apply(testsFile, files);
+      testFiles.push.apply(testFiles, files);
     });
   } else {
-    const testSuffixFiles = glob.sync(join(cwd, '!(node_modules)/**/*-test.js'));
-    const specSuffixFiles = glob.sync(join(cwd, '!(node_modules)/**/*-spec.js'));
-    testsFile = testsFile.concat(testSuffixFiles, specSuffixFiles);
+    const globFiles = glob.sync(join(cwd, '!(node_modules)/**/*-+(test|spec).js'));
+    testFiles = testFiles.concat(globFiles);
   }
 
   webpackConfig.entry = {
-    test: Array.from(new Set(testsFile)),
+    test: Array.from(new Set(testFiles)),
     mocha: join(require.resolve('mocha'), '../mocha.js'),
   };
 

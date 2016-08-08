@@ -15,8 +15,10 @@ export default function(config) {
     ],
   }), () => {
     const url = `http://127.0.0.1:${config.port}/tests/runner.html`;
-    const mochaPhantomBin = join(require.resolve('mocha-phantomjs'), '../../bin/mocha-phantomjs');
-
+    let mochaPhantomBin = join(__dirname, '../node_modules/.bin/mocha-phantomjs');
+    if (!fs.existsSync(mochaPhantomBin)) {
+      mochaPhantomBin = join(require.resolve('mocha-phantomjs'), '../../../.bin/mocha-phantomjs');
+    }
     const cmds = [];
     if (config.coverage) {
       const hook = join(__dirname, './coverageHook.js');

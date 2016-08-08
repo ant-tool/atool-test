@@ -49,13 +49,13 @@ atool-test --port 9888 --no-chai --no-coverage --keep
 import expect from 'expect.js';
 ```
 
-## Part Of Files
+## Part Of test Files
 
 If you want to test with part of files, custom `cwd/webpack.config.js`:
 
 ```
 module.exports = function(webpackConfig) {
-  webpackConfig.entry = ['./tests/moduleA-test.js', './tests/**/*-spec.js'];
+  webpackConfig.atoolTestSpec = ['./tests/moduleA-test.js', './tests/**/*-spec.js'];
   return webpackConfig;
 };
 ```
