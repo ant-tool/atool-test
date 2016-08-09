@@ -35,7 +35,7 @@ atool-test --port 9888 --no-chai --no-coverage --keep
 - `--no-chai`: run test without chai;
 - `-k, --keep`: keep process after tests, for browser test;
 - `--config <path>`: custom config path, default is webpack.config.js';
-- `-t, --timeout <timeout ms>`: specify the test startup timeout(ms) to use;
+- [mocha-phantomjs options](https://github.com/nathanboktae/mocha-phantomjs#usage)
 
 ## Custom Assert
 

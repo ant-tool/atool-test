@@ -1,5 +1,9 @@
 # History
 
+## 0.5.1
+
+- [`new`] support mocha-phantomjs options
+
 ## 0.5.0
 
 - [`change`] use `webpackConfig.atoolTestSpec` to support part of test case

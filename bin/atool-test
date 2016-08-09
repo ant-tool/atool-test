@@ -19,14 +19,29 @@ if (!process.send) {
   var cwd = process.cwd();
 
   program
+    .allowUnknownOption()
     .version(require('../package').version, '-v, --version')
     .option('-p, --port <n>', 'server port. Default: 9876')
     .option('--no-chai', 'run tests with custom assert library')
     .option('--no-coverage', 'without coverage')
     .option('-k, --keep', 'keep process after tests')
     .option('--config <path>', 'custom config path, default is webpack.config.js')
-    .option('-t, --timeout <timeout>', 'specify the test startup timeout to use')
     .parse(process.argv);
+
+  var args = process.argv.splice(2);
+  ['--no-chai', '--no-coverage', '--keep', '-k'].forEach(function(o) {
+    var index = args.indexOf(o);
+    if ( index > -1) {
+      args.splice(index, 1);
+    }
+  });
+
+  ['-p', '--port', '--config'].forEach(function(o) {
+    var index = args.indexOf(o);
+    if ( index > -1) {
+      args.splice(index, 2);
+    }
+  });
 
   require('../lib')({
     port: program.port || '9876',
@@ -34,7 +49,7 @@ if (!process.send) {
     keep: program.keep,
     coverage: program.coverage,
     config: program.config || 'webpack.config.js',
-    timeout: program.timeout || 6000,
+    args: args,
   });
 
   require('atool-monitor').emit();

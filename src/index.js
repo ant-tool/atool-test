@@ -20,13 +20,14 @@ export default function(config) {
       mochaPhantomBin = join(require.resolve('mocha-phantomjs'), '../../../.bin/mocha-phantomjs');
     }
     const cmds = [];
+    const mochaPhantomOpts = config.args.join(' ');
     if (config.coverage) {
       const hook = join(__dirname, './coverageHook.js');
-      cmds.push([`${mochaPhantomBin} --ignore-resource-errors --timeout ${config.timeout} ${url}?cov --hooks ${hook}`]);
+      cmds.push([`${mochaPhantomBin} --ignore-resource-errors ${mochaPhantomOpts} ${url}?cov --hooks ${hook}`]);
       const istanbulBin = require.resolve('istanbul/lib/cli.js');
       cmds.push(`node ${istanbulBin} report lcov json-summary --include coverage/coverage.json`);
     } else {
-      cmds.push([`${mochaPhantomBin} --timeout ${config.timeout} --ignore-resource-errors ${url}`]);
+      cmds.push([`${mochaPhantomBin} ${mochaPhantomOpts} --ignore-resource-errors ${url}`]);
     }
 
     exeq.apply(this, cmds).then(() => {
