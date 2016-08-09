@@ -15,6 +15,7 @@ describe('index.test: index test with no assert lib', function() {
     process.chdir(cwd);
     test({
       port,
+      args: []
     });
     setTimeout(done, 1000);
   });
