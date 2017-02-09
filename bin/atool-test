@@ -10,6 +10,9 @@ function start() {
       start();
     }
   });
+  p.on('exit', function(code) {
+    process.exit(code);
+  });
 }
 
 if (!process.send) {

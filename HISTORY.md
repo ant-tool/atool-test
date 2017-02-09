@@ -1,5 +1,9 @@
 # History
 
+## 0.5.2
+
+- [`fix`] process exit code
+
 ## 0.5.1
 
 - [`new`] support mocha-phantomjs options
