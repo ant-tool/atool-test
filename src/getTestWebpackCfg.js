@@ -71,7 +71,7 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
       testFiles.push.apply(testFiles, files);
     });
   } else {
-    const globFiles = glob.sync(join(cwd, '!(node_modules)/**/*-+(test|spec).js'));
+    const globFiles = glob.sync(join(cwd, '!(node_modules)/**/*-+(test|spec).+(ts|js)'));
     testFiles = testFiles.concat(globFiles);
   }
 
