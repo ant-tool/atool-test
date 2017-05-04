@@ -1,5 +1,9 @@
 # History
 
+## 0.5.3
+
+- [`new`] support `.jsx\tsx` file
+
 ## 0.5.2
 
 - [`fix`] process exit code
