@@ -1,6 +1,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="http://gw.alipayobjects.com/os/rmsportal/yQcEXnoxyYCSxQpFVbhi.css">
   <% for (var css in htmlWebpackPlugin.options.files.css) { %>
   <link href="<%= htmlWebpackPlugin.options.files.css[css] %>" rel="stylesheet">
   <% } %>
@@ -8,10 +9,10 @@
 </head>
 <body>
 <div id="mocha"></div>
+<!-- <script type="text/javascript" src="http://gw.alipayobjects.com/os/rmsportal/ykjkBgJLwlvkkaCbbSZj.js"></script> -->
 <% for (var js in htmlWebpackPlugin.options.files.js) { %>
 <script src="<%= htmlWebpackPlugin.options.files.js[js] %>"></script>
 <% } %>
-<script src="/tests/mocha.js"></script>
 <script>
   window.initMochaPhantomJS && window.initMochaPhantomJS();
   mocha.ui('bdd')

@@ -76,8 +76,7 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   }
 
   webpackConfig.entry = {
-    test: Array.from(new Set(testFiles)),
-    mocha: join(require.resolve('mocha'), '../mocha.js'),
+    test: Array.from(new Set(testFiles))
   };
 
   return webpackConfig;
