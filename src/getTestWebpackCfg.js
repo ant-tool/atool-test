@@ -46,20 +46,20 @@ module.exports = function getTestWebpackCfg(chai, coverage, config) {
   webpackConfig.resolveLoader.modulesDirectories.push(join(__dirname, '../node_modules'));
   webpackConfig.output.libraryTarget = 'var';
 
-  if (coverage) {
-    const preLoaders = [
-      {
-        test: /\.jsx?$/,
-        exclude: /(__tests__|tests|test|node_modules|bower_components)/,
-        loader: 'isparta',
-      },
-    ];
-    if (webpackConfig.module.preLoaders) {
-      webpackConfig.module.preLoaders.concat(preLoaders);
-    } else {
-      webpackConfig.module.preLoaders = preLoaders;
-    }
-  }
+  // if (coverage) {
+  //   const preLoaders = [
+  //     {
+  //       test: /\.jsx?$/,
+  //       exclude: /(__tests__|tests|test|node_modules|bower_components)/,
+  //       loader: 'isparta',
+  //     },
+  //   ];
+  //   if (webpackConfig.module.preLoaders) {
+  //     webpackConfig.module.preLoaders.concat(preLoaders);
+  //   } else {
+  //     webpackConfig.module.preLoaders = preLoaders;
+  //   }
+  // }
 
   let testFiles = [join(__dirname, chai ? './setup_chai.js' : './setup.js')];
 
